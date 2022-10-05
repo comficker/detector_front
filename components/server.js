@@ -37,8 +37,10 @@ Date.prototype.str = function () {
 }
 
 Date.prototype.normalize = function () {
+  const d = this.getDate()
+  const m = this.getMonth() + 1
   return (
-    `${this.getFullYear()}-${this.getMonth() + 1}-${this.getDate()}`
+    `${this.getFullYear()}-${m < 10 ? "0" + m : m}-${d < 10 ? "0" + d : d}`
   )
 }
 
@@ -47,7 +49,6 @@ Date.prototype.setZero = function () {
   this.setMinutes(0)
   this.setSeconds(0)
 }
-
 
 
 Vue.mixin({

@@ -12,7 +12,7 @@
           ></div>
         </template>
         <div class="text-left text-xs">
-          <div class="font-bold">{{ d.title }}</div>
+          <div class="font-bold">{{ d.date }}</div>
           <div>{{ d.up }} reports up</div>
           <div>{{ d.down }} reports down</div>
         </div>
@@ -25,14 +25,14 @@
 export default {
   name: "CalendarChart",
   props: {
-    results: {
-      type: Array,
-      default: () => ([])
+    rp: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {
     return {
-      date_arr: {}
+      date_arr: []
     }
   },
   methods: {
@@ -42,31 +42,12 @@ export default {
       fr.setMonth(fr.getMonth() - 1)
       const to = new Date()
       to.setZero()
-      let date_arr = {}
+      let date_arr = []
       while (fr.getTime() < to.getTime()) {
         fr = fr.addDays(1)
-        date_arr[fr.normalize()] = {
-          title: fr.str(),
-          up: 0,
-          down: 0
-        }
+        date_arr.push(this.rp[fr.normalize()] ? this.rp[fr.normalize()]: {d: fr.normalize(), up: 0, down: 0})
       }
       this.date_arr = date_arr;
-      this.results.forEach(item => {
-        const d = new Date(item.created)
-        if (!date_arr[d.normalize()]) {
-          date_arr[d.normalize()] = {
-            title: d.str(),
-            up: 0,
-            down: 0
-          }
-        }
-        if (item.is_down) {
-          date_arr[d.normalize()].down = date_arr[d.normalize()].down + 1
-        } else {
-          date_arr[d.normalize()].up = date_arr[d.normalize()].up + 1
-        }
-      })
     },
   },
   watch: {
@@ -79,7 +60,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

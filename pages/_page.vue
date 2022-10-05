@@ -16,13 +16,13 @@
           <div class="p-3 space-y-3">
             <div class="text-xs">Last 30 days status: 0.0% up</div>
             <client-only>
-              <calendar-chart :results="results"/>
+              <calendar-chart :rp="instance.rp || {}"/>
             </client-only>
           </div>
           <div class="p-3 space-y-3">
             <div class="text-xs">Is {{ instance.name }} down for everyone or just me?</div>
             <div class="text-2xl uppercase">
-              <b>{{ today.down.toLocaleString() }} / {{(today.down + today.up).toLocaleString()}}</b>
+              <b>{{ today.down.toLocaleString() }} / {{ (today.down + today.up).toLocaleString() }}</b>
               <span class="text-gray-500">said down</span>
             </div>
           </div>
@@ -110,7 +110,7 @@ export default {
       query: {
         page: 1,
         instance__id_string: this.$route.params.page,
-        page_size: -1,
+        page_size: 5,
         created_after: fr.normalize(),
         created_before: to.normalize()
       },
@@ -127,31 +127,12 @@ export default {
   },
   async fetch() {
     const res = await Promise.all([
-        this.$axios.$get(`/app/instances/${this.$route.params.page}/`),
-        this.$axios.$get(`/app/reports/`, {
-          params: this.query
-        }),
-        this.$axios.$get(`/app/instances/`, {
-          params: {
-            // related: this.$route.params.page,
-            page_size: 5
-          }
-        }),
-      ]
-    )
+      this.$axios.$get(`/app/instances/${this.$route.params.page}/`)
+    ])
     this.instance = res[0]
-    this.results = res[1]
-    this.results.forEach(item => {
-      const d = new Date(item.created)
-      if (d.normalize() === this.now.normalize()) {
-        if (item.is_down) {
-          this.today.down += 1
-        } else {
-          this.today.up += 1
-        }
-      }
-    })
-    this.res = res[2]
+    if (this.instance.rp && this.instance.rp[this.now.normalize()]) {
+      this.today = this.instance.rp[this.now.normalize()]
+    }
   },
   head() {
     return {
@@ -184,7 +165,25 @@ export default {
       this.results = await this.$axios.$get(`/app/reports/`, {
         params: this.query
       })
+    },
+    async clientFetch() {
+      const res = await Promise.all([
+        this.$axios.$get(`/app/reports/`, {
+          params: this.query
+        }).then(res => res.results),
+        this.$axios.$get(`/app/instances/`, {
+          params: {
+            // related: this.$route.params.page,
+            page_size: 5
+          }
+        }),
+      ])
+      this.results = res[0]
+      this.res = res[1]
     }
+  },
+  mounted() {
+    this.clientFetch()
   }
 }
 </script>

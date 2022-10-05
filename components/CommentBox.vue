@@ -160,8 +160,8 @@ export default {
         content: this.content,
         instance: this.instance.id,
         ...this.hasLocate ? this.location : {}
-      }).then(() => {
-        this.$emit('load', 1)
+      }).then((res) => {
+        this.$emit('sent', res)
       })
     }
   }
