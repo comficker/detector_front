@@ -1,5 +1,19 @@
 <template>
-  <div v-if="instance" class="space-y-8 py-4 md:py-8">
+  <div v-if="instance" class="space-y-8 pb-4 md:pb-8">
+    <div class="bg-yellow-500 py-1.5 text-xs uppercase font-bold px-4 -mx-4">
+      <div class="max-w-2xl mx-auto flex gap-3 items-center">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </div>
+        <span>/</span>
+        <div>{{ instance.name }} outage</div>
+      </div>
+    </div>
     <div class="max-w-2xl mx-auto">
       <h1 class="text-5xl text-green-900 font-extrabold">Is {{ instance.name }} Down?</h1>
       <p class="text-xl text-gray-400"><b>Yes</b>, current {{ instance.name }} status is
@@ -177,12 +191,14 @@ export default {
     }
   },
   methods: {
-    async handleLoad(page) {
+    handleLoad(page) {
       if (!page) {
         this.query.page = this.query.page + 1
       }
-      this.results = await this.$axios.$get(`/app/reports/`, {
+      this.$axios.$get(`/app/reports/`, {
         params: this.query
+      }).then(res => {
+        this.results.concat(res.results)
       })
     },
     async clientFetch() {

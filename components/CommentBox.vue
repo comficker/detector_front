@@ -15,7 +15,7 @@
         placeholder="I had an issue!"
         class="p-3 text-sm border rounded w-full shadow-inner"
       />
-      <div class="flex justify-between font-bold">
+      <div class="md:flex justify-between font-bold">
         <div class="flex space-x-3">
           <div class="flex justify-center space-x-1 items-center text-xs">
             <button
@@ -34,7 +34,7 @@
             </div>
           </div>
         </div>
-        <div class="flex space-x-3">
+        <div class="flex space-x-3 justify-between">
           <div class="flex justify-center space-x-1 items-center text-xs">
             <button
               class="bg-green-500 relative outline-none inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200"

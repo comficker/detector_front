@@ -3,13 +3,13 @@
     <div class="md:w-3/4 space-y-4">
       <div class="flex space-x-3">
         <svg
-          xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
         >
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
         </svg>
         <div>
-          <h1 class="text-5xl text-green-900 font-extrabold">Is <span class="text-red-500">something</span> down?</h1>
+          <h1 class="text-4xl text-green-900 font-extrabold">Is <span class="text-red-500">something</span> down?</h1>
         </div>
       </div>
       <div class="border space-y-3 bg-white shadow-sm rounded">
@@ -59,7 +59,7 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="flex justify-center p-3">
+      <div class="flex justify-center">
         <div
           style="width: 468px; height: 60px"
           class="bg-gray-50 rounded shadow-inner"
