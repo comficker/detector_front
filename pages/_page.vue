@@ -136,7 +136,26 @@ export default {
   },
   head() {
     return {
-      title: this.meta.title
+      title: this.meta.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.meta.desc,
+        },
+        {
+          property: 'og:title',
+          hid: 'og:title',
+          name: 'og:title',
+          content: this.meta.title,
+        },
+        {
+          property: 'og:description',
+          hid: 'og:description',
+          name: 'og:description',
+          content: this.meta.desc,
+        },
+      ]
     }
   },
   computed: {

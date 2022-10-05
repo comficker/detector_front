@@ -35,8 +35,26 @@ export default {
   components: {},
   head() {
     return {
-      title: "Is Something Down? | issomethingdown.com",
-      meta: [{hid: 'description', name: 'description', content: "desc"}]
+      title: "Is Something Down?",
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: "desc"
+        },
+        {
+          property: 'og:title',
+          hid: 'og:title',
+          name: 'og:title',
+          content: 'Is Something Down? | IsSomethingDown.com',
+        },
+        {
+          property: 'og:description',
+          hid: 'og:description',
+          name: 'og:description',
+          content: 'Is something down for everyone or just me? Check your favorite services are down or having problems.',
+        },
+      ]
     }
   }
 }

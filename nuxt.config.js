@@ -1,15 +1,19 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Is Down Now',
+    title: 'Is Something Down?',
+    titleTemplate: '%s - IsSomethingDown.com',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {
+        hid: 'description', name: 'description',
+        content: 'Is something down for everyone or just me? Check your favorite services are down or having problems.'
+      },
+      {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'
@@ -59,6 +63,9 @@ export default {
   pwa: {
     manifest: {
       lang: 'en'
+    },
+    icon: {
+      iconFileName: 'icon.png'
     }
   },
 

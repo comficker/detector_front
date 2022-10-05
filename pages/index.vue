@@ -9,8 +9,7 @@
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
         </svg>
         <div>
-          <h1 class="text-5xl text-green-900 font-extrabold">Is <span class="">__</span> down now?</h1>
-          <p class="text-xl text-gray-400">Do you participate? Or do you speculate?</p>
+          <h1 class="text-5xl text-green-900 font-extrabold">Is <span class="text-red-500">something</span> down?</h1>
         </div>
       </div>
       <div class="border space-y-3 bg-white shadow-sm rounded">
