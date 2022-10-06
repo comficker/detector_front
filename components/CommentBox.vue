@@ -1,5 +1,5 @@
 <template>
-  <div v-if="instance.id" class="space-y-3">
+  <div class="space-y-3">
     <div class="flex text-xs uppercase font-bold gap-1 items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24" fill="none"
@@ -7,7 +7,7 @@
       >
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
       </svg>
-      <div class="">Community feedback on {{ instance.name }}'s status</div>
+      <div class="">Community feedback on {{ instance?.name || 'Something' }}'s status</div>
     </div>
     <div class="space-y-1.5">
       <textarea

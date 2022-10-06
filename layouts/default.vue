@@ -9,11 +9,10 @@
       <nuxt/>
     </main>
     <footer class="p-4 text-xs bg-gray-50 border-t">
-      <div class="mx-auto max-w-2xl md:flex justify-between">
+      <div class="mx-auto max-w-2xl flex justify-between">
         <p class="text-gray-500">© 2022 <b>isSomethingDown.com</b>, all rights reserved.</p>
         <a target="_blank" class="font-bold" href="/project-sitemap.xml">sitemap</a>
       </div>
-
     </footer>
   </div>
 </template>

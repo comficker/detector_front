@@ -1,5 +1,5 @@
 <template>
-  <div v-if="instance" class="space-y-8 pb-4 md:pb-8">
+  <div class="space-y-8 pb-4 md:pb-8">
     <div class="bg-yellow-500 py-1.5 text-xs uppercase font-bold px-4 -mx-4">
       <div class="max-w-2xl mx-auto flex gap-3 items-center">
         <div>
@@ -11,30 +11,54 @@
           </svg>
         </div>
         <span>/</span>
-        <div>{{ instance.name }} outage</div>
+        <div :class="{'h-4 w-32 bg-gray-200 animate-pulse': !instance}">
+          <template v-if="instance">{{ instance.name }} outage</template>
+        </div>
       </div>
     </div>
     <div class="max-w-2xl mx-auto">
-      <h1 class="text-5xl text-green-900 font-extrabold">Is {{ instance.name }} Down?</h1>
-      <p class="text-xl text-gray-400"><b>Yes</b>, current {{ instance.name }} status is
-        <span
-          class="text-green-500 font-bold"
-          :class="{'text-red-500': instance.is_down}"
-        >{{ instance.is_down ? 'down' : 'up' }}</span>!
+      <h1
+        class="text-5xl text-green-900 font-extrabold"
+        :class="{'h-10 w-32 bg-gray-200 animate-pulse mb-2': !instance}"
+        :style="!instance ? {width: `45%`} : undefined"
+      >
+        <template v-if="instance">Is {{ instance.name }} Down?</template>
+      </h1>
+      <p
+        class="text-xl text-gray-400"
+        :class="{'h-6 bg-gray-200 animate-pulse': !instance}"
+        :style="!instance ? {width: `75%`}: undefined"
+      >
+        <template v-if="instance">
+          <b>Yes</b>, current {{ instance.name }} status is
+          <span
+            class="text-green-500 font-bold"
+            :class="{'text-red-500': instance.is_down}"
+          >{{ instance.is_down ? 'down' : 'up' }}</span>!
+        </template>
       </p>
     </div>
     <div class="max-w-2xl mx-auto space-y-3">
       <div class="border-2 bg-white shadow-sm rounded">
-        <div class="p-3 border-b-2 bg-gray-50 text-xs uppercase font-bold">{{ instance.name }} status history</div>
+        <div class="p-3 border-b-2 bg-gray-50 text-xs uppercase font-bold">
+          <div :class="{'h-4 w-64 bg-gray-200 animate-pulse': !instance}">
+            <template v-if="instance">{{ instance.name }} status history</template>
+          </div>
+        </div>
         <div class="grid md:grid-cols-2 md:divide-x-2 border-b-2">
           <div class="p-3 space-y-3">
             <div class="text-xs">Last 30 days status: 0.0% up</div>
             <client-only>
-              <calendar-chart :rp="instance.rp || {}"/>
+              <calendar-chart :rp="instance?.rp || {}"/>
             </client-only>
           </div>
           <div class="p-3 space-y-3">
-            <div class="text-xs">Is {{ instance.name }} down for everyone or just me?</div>
+            <div
+              class="text-xs"
+              :class="{'h-4 w-48 bg-gray-200 animate-pulse': !instance}"
+            >
+              <template v-if="instance">Is {{ instance.name }} down for everyone or just me?</template>
+            </div>
             <div class="text-2xl uppercase">
               <b>{{ today.down.toLocaleString() }} / {{ (today.down + today.up).toLocaleString() }}</b>
               <span class="text-gray-500">said down</span>
@@ -70,7 +94,12 @@
           </div>
         </div>
       </div>
-      <p class="text-sm text-gray-400">{{ instance.desc }}</p>
+      <p
+        class="text-sm text-gray-400"
+        :class="{'h-4 w-64 bg-gray-200 animate-pulse': !instance}"
+      >
+        <template v-if="instance">{{ instance.desc }}</template>
+      </p>
       <div class="space-y-2">
         <h2 class="flex items-center text-stone-700">
           <svg
@@ -84,25 +113,33 @@
         </h2>
         <div class="flex gap-1.5 flex-wrap text-green-700">
           <nuxt-link
-            v-for="item in res.results"
-            :key="item.id"
-            class="flex items-center py-1"
-            :to="`/${item.id_string}`"
+            v-for="(item, i) in res.results"
+            :key="i"
+            class="flex items-center py-1 space-x-1"
+            :to="`/${item?.id_string}`"
           >
-            <img
+            <div
               class="w-3 h-3"
-              :src="item.external_ico"
-              alt=""
+              :class="{'bg-gray-200 animate-pulse': !item}"
             >
-            <div class="px-2 font-bold">
-              <span>{{ item.name }}</span>
+              <img
+                v-if="item"
+                :src="item.external_ico"
+                alt=""
+              >
+            </div>
+            <div
+              class="px-2 font-bold"
+              :class="{'h-3 w-12 bg-gray-200 animate-pulse': !item}"
+            >
+              <span v-if="item">{{ item.name }}</span>
             </div>
           </nuxt-link>
         </div>
       </div>
     </div>
     <div class="max-w-2xl mx-auto">
-      <comment-box :instance="instance" :results="results" @load="handleLoad"/>
+      <comment-box :instance="instance || {}" :results="results" @load="handleLoad"/>
     </div>
   </div>
 </template>
@@ -130,11 +167,11 @@ export default {
       },
       now: new Date(),
       today: {
-        up: 0,
+        up: 1,
         down: 0
       },
       res: {
-        results: [],
+        results: [null, null, null, null, null],
         count: 0
       }
     }
@@ -174,7 +211,10 @@ export default {
   },
   computed: {
     meta() {
-      if (!this.instance) return {}
+      if (!this.instance) return {
+        title: 'Is Something Down',
+        desc: ''
+      }
       return {
         title: `Is ${this.instance.name} down? Check ${this.instance.name} outage.`,
         desc: `Is ${this.instance.name} down right now? Check whether ${this.instance.name} is down right now for everyone or just for you.`
