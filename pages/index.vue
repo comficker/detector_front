@@ -1,15 +1,15 @@
 <template>
-  <div class="max-w-2xl mx-auto md:flex gap-4 py-4 md:py-16">
-    <div class="md:w-3/4 space-y-4">
-      <div class="flex space-x-3">
+  <div class="max-w-2xl mx-auto md:flex gap-4 py-4 md:py-6">
+    <div class="space-y-4">
+      <div class="flex space-x-3 items-center">
         <svg
-          xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
         >
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
         </svg>
         <div>
-          <h1 class="text-4xl text-green-900 font-extrabold">Is <span class="text-red-500">something</span> down?</h1>
+          <h1 class="text-xl text-green-900 font-extrabold leading-none">Is <span class="text-red-500">something</span> down?</h1>
         </div>
       </div>
       <div class="border space-y-3 bg-white shadow-sm rounded">
@@ -41,7 +41,7 @@
             <span class="text-xs uppercase font-bold">Recent</span>
           </h2>
         </div>
-        <div class="px-3 pb-3 grid grid-cols-3 text-green-700">
+        <div class="px-3 pb-3 grid grid-cols-2 md:grid-cols-3 text-green-700">
           <nuxt-link
             v-for="item in r1.results"
             :key="item.id"
@@ -59,12 +59,6 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="flex justify-center">
-        <div
-          style="width: 468px; height: 60px"
-          class="bg-gray-50 rounded shadow-inner"
-        ></div>
-      </div>
       <div class="py-3 border space-y-3 bg-white shadow-sm rounded">
         <div class="px-3">
           <h2 class="flex items-center text-stone-700">
@@ -78,7 +72,7 @@
             <span class="text-xs uppercase font-bold">Popular</span>
           </h2>
         </div>
-        <div class="px-3 grid grid-cols-3 text-green-700">
+        <div class="px-3 grid grid-cols-2 md:grid-cols-3 text-green-700">
           <nuxt-link
             v-for="item in r2.results"
             :key="item.id"
@@ -109,7 +103,7 @@
             <span class="text-xs uppercase font-bold">New</span>
           </h2>
         </div>
-        <div class="px-3 grid grid-cols-3 text-green-700">
+        <div class="px-3 grid grid-cols-2 md:grid-cols-3 text-green-700">
           <nuxt-link
             v-for="item in r3.results"
             :key="item.id"
@@ -128,14 +122,6 @@
         </div>
       </div>
       <p class="italic text-sm">Is something down? Check whether any service is down right now or having outage problems for everyone or just for you.</p>
-    </div>
-    <div class="flex-1">
-      <div class="flex justify-center p-3">
-        <div
-          style="width: 160px; height: 600px"
-          class="bg-gray-50 rounded shadow-inner"
-        ></div>
-      </div>
     </div>
   </div>
 </template>
@@ -163,19 +149,19 @@ export default {
     const r = await Promise.all([
       this.$axios.$get('/app/instances/', {
         params: {
-          page_size: 9,
+          page_size: 12,
           ordering: '-last_check'
         }
       }),
       this.$axios.$get('/app/instances/', {
         params: {
-          page_size: 9,
+          page_size: 12,
           ordering: '-today_report'
         }
       }),
       this.$axios.$get('/app/instances/', {
         params: {
-          page_size: 9,
+          page_size: 12,
           ordering: 'created'
         }
       })
