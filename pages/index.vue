@@ -1,18 +1,21 @@
 <template>
   <div class="max-w-2xl mx-auto md:flex gap-4 py-4 md:py-6">
     <div class="space-y-4">
-      <div class="flex space-x-3 items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        >
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-        </svg>
-        <div>
-          <h1 class="text-xl text-green-900 font-extrabold leading-none">Is <span class="text-red-500">something</span> down?</h1>
+      <div class="p-3 border bg-gray-100 space-y-2">
+        <div class="flex space-x-3 items-center uppercase">
+          <svg
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          >
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <div>
+            <h1 class="text-xl text-green-900 font-extrabold leading-none">Is <span class="text-red-500">something</span> down?</h1>
+          </div>
         </div>
+        <p>Is something down? Check whether any service is down right now or having outage problems for everyone or just for you.</p>
       </div>
-      <div class="border space-y-3 bg-white shadow-sm rounded">
+      <div class="border space-y-1.5 bg-white shadow-sm rounded">
         <div class="p-3 border-b">
           <div class="border p-4 flex space-x-3 items-center">
             <svg
@@ -53,13 +56,13 @@
               :src="item.external_ico"
               alt=""
             >
-            <div class="px-2 font-bold">
+            <div class="px-2 font-bold a-line">
               <span>{{ item.name }}</span>
             </div>
           </nuxt-link>
         </div>
       </div>
-      <div class="py-3 border space-y-3 bg-white shadow-sm rounded">
+      <div class="py-3 border space-y-1.5 bg-white shadow-sm rounded">
         <div class="px-3">
           <h2 class="flex items-center text-stone-700">
             <svg
@@ -84,13 +87,13 @@
               :src="item.external_ico"
               alt=""
             >
-            <div class="px-2 font-bold">
+            <div class="px-2 font-bold a-line">
               <span>{{ item.name }}</span>
             </div>
           </nuxt-link>
         </div>
       </div>
-      <div class="py-3 border space-y-3 bg-white shadow-sm rounded">
+      <div class="py-3 border space-y-1.5 bg-white shadow-sm rounded">
         <div class="px-3">
           <h2 class="flex items-center text-stone-700">
             <svg
@@ -115,13 +118,12 @@
               :src="item.external_ico"
               alt=""
             >
-            <div class="px-2 font-bold">
+            <div class="px-2 font-bold a-line">
               <span>{{ item.name }}</span>
             </div>
           </nuxt-link>
         </div>
       </div>
-      <p class="italic text-sm">Is something down? Check whether any service is down right now or having outage problems for everyone or just for you.</p>
     </div>
   </div>
 </template>
