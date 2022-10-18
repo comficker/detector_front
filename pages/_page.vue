@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-8 pb-4 md:pb-8">
-    <div class="bg-yellow-500 py-1.5 text-xs uppercase font-bold px-4 -mx-4">
+    <div class="bg-yellow-300 py-1.5 text-xs uppercase font-bold px-4 -mx-4">
       <div class="max-w-2xl mx-auto flex gap-3 items-center">
         <div>
           <svg
@@ -18,7 +18,7 @@
     </div>
     <div class="max-w-2xl mx-auto">
       <h1
-        class="text-5xl text-green-900 font-extrabold"
+        class="text-5xl font-extrabold"
         :class="{'h-10 w-32 bg-gray-200 animate-pulse mb-2': !instance}"
         :style="!instance ? {width: `45%`} : undefined"
       >

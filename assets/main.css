@@ -8,6 +8,7 @@ html {
 }
 
 body {
+  font-size: 14px;
   font-feature-settings: "kern";
   font-kerning: normal;
   -webkit-font-smoothing: antialiased;
